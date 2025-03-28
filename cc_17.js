@@ -25,3 +25,37 @@ customer1.addPurchase(50); // Alice makes a purchase of $50
 
 // Log Alice's total spending to the console
 console.log(`${customer1.name} has spent a total of $${customer1.getTotalSpent()}`);
+
+//Task 2: Create a SalesRep Class
+
+class SalesRep {
+    constructor(name) {
+        this.name = name; // Sales rep's name
+        this.clients = []; // Array to store clients (instances of Customer)
+    }
+
+    // Method to add a new client (Customer) to the list of clients
+    addClient(customer) {
+        this.clients.push(customer); // Adds the provided customer to the clients array
+    }
+
+    // Method to get the total spent by a specific client by their name
+    getClientTotal(name) {
+        // Finds the customer by their name in the clients array
+        const client = this.clients.find(c => c.name === name);
+        
+        // If customer is found, return their total spending, otherwise return a message
+        if (client) {
+            return client.getTotalSpent();
+        } else {
+            return "Client not found."; // If client does not exist, return this message
+        }
+    }
+}
+
+// Example of creating a sales rep and assigning clients to them
+const salesRep = new SalesRep("John");
+salesRep.addClient(customer1); // John adds Alice as a client
+
+// Log John's client list and Alice's total spending to the console
+console.log(`${salesRep.name} managed a total of $${salesRep.getClientTotal("Alice")}`);
